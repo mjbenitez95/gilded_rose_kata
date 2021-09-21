@@ -4,6 +4,9 @@ def update_quality(items)
     when 'NORMAL ITEM'
       update_normal(item)
       next
+    when 'Aged Brie'
+      update_brie(item)
+      next
     end
 
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
@@ -60,6 +63,14 @@ def update_normal(item)
   item.quality -= 1 if item.sell_in <= 0
 end
 
+def update_brie(item)
+  item.sell_in -= 1
+  return if item.quality == 50
+  
+  item.quality += 1
+  item.quality += 1 if item.sell_in <= 0 && item.quality != 50
+end
+
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
 
 Item = Struct.new(:name, :sell_in, :quality)
@@ -74,4 +85,3 @@ Item = Struct.new(:name, :sell_in, :quality)
 #   Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20),
 #   Item.new("Conjured Mana Cake", 3, 6),
 # ]
-
