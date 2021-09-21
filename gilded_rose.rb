@@ -7,6 +7,8 @@ def update_quality(items)
     when 'Aged Brie'
       update_brie(item)
       next
+    when 'Sulfuras, Hand of Ragnaros'
+      next
     end
 
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
@@ -69,6 +71,9 @@ def update_brie(item)
   
   item.quality += 1
   item.quality += 1 if item.sell_in <= 0 && item.quality != 50
+end
+
+def update_backstage(item)
 end
 
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
